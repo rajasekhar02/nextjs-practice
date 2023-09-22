@@ -56,7 +56,7 @@ export default async function Page({
         {<a href={info.next}>Next</a>}
         {<a href={info.prev}>Prev</a>}
       </div>
-      <ul className="grid-cols-4 grid gap-4">
+      <ul className="grid grid-cols-4 gap-4">
         {results.map((character) => (
           <li>
             <h1 className="text-2xl font-medium text-gray-200">
@@ -64,7 +64,7 @@ export default async function Page({
             </h1>
             <p className="font-medium text-gray-500">{character.status}</p>
             <img
-              className="rounded-full w-32 h-32 shrink-0"
+              className="h-32 w-32 shrink-0 rounded-full"
               src={character.image}
             ></img>
           </li>
