@@ -90,14 +90,64 @@ const ListElement = function (character: Character, index: number) {
   );
 };
 
-const paginationElement = function (info: Info, currentPage: number) {
+const paginationElement = function (
+  info: Info,
+  currentPage: number,
+  currPageCharacterSize: number,
+) {
+  const startCharacterNo = (currentPage - 1) * 20 + 1;
   return (
-    <nav>
-      <div>
-        {(currentPage - 1) * 20 + 1} - {currentPage * 20} of {info.count}
+    <nav className="md:flex md:items-center md:justify-between">
+      {/* <div className="custom-number-input h-10 w-32">
+        <label
+          htmlFor="custom-input-number"
+          className="w-full text-sm font-semibold text-gray-700"
+        >
+          Goto
+        </label>
+        <div className="relative mt-1 flex h-10 w-full flex-row rounded-lg bg-transparent">
+          <input
+            type="number"
+            className="text-md md:text-basecursor-default flex w-full items-center bg-gray-300 text-center font-semibold text-gray-700  outline-none hover:text-black focus:text-black  focus:outline-none"
+            name="custom-input-number"
+            value="0"
+          ></input>
+        </div>
+      </div> */}
+      <div className="min-w-0 flex-1">
+        <h2 className="sm:overflow-hidden sm:text-ellipsis sm:whitespace-nowrap sm:text-3xl sm:tracking-tight">
+          {" "}
+          Ricky Morty Characters
+        </h2>
       </div>
-      <div>{<a href={info.prev}>Prev</a>}</div>
-      <div>{<a href={info.next}>Next</a>}</div>
+
+      <div className="-mt-px flex w-0 flex-1">
+        {
+          <a
+            className="inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500/100"
+            href={info.prev}
+          >
+            Prev
+          </a>
+        }
+      </div>
+      <div className="hidden md:-mt-px md:flex">
+        <p className="text-sm font-medium text-gray-700">
+          {`${startCharacterNo}-${
+            startCharacterNo + currPageCharacterSize
+          } of ${info.count}`}
+        </p>
+      </div>
+      <div className="-mt-px flex w-0 flex-1 justify-end">
+        {
+          <a
+            className="inline-flex items-center  border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500/100"
+            href={info.next}
+          >
+            Next
+          </a>
+        }
+      </div>
     </nav>
   );
 };
@@ -111,15 +161,22 @@ export default async function Page({
   const { info, results } = data;
 
   return (
-    <div className="space-y-4 bg-gray-100 pb-8 pt-8">
-      <div className="pagination-actions">
-        {paginationElement(info, searchParams.page || 1)}
-      </div>
-      <div className="ml-auto mr-auto max-w-7xl pl-4 pr-4">
-        <ul role="list" className="grid grid-cols-4 gap-4">
-          {results.map(ListElement)}
-        </ul>
-      </div>
-    </div>
+    <>
+      <header className="bg-white/100 shadow-sm">
+        <div className="pagination-actions ml-auto mr-auto max-w-7xl pb-4 pl-4 pr-4 pt-4 sm:pl-6 sm:pr-6 lg:pl-8 lg:pr-8">
+          {paginationElement(info, searchParams.page || 1, results.length)}
+        </div>
+      </header>
+      <main>
+        <div className="ml-auto mr-auto max-w-7xl sm:pl-6 sm:pr-4 lg:pl-8 lg:pr-8">
+          <ul
+            role="list"
+            className="grid grid-cols-4 gap-4 pb-8 pl-4 pr-4 pt-8 sm:pl-0 sm:pr-0"
+          >
+            {results.map(ListElement)}
+          </ul>
+        </div>
+      </main>
+    </>
   );
 }
