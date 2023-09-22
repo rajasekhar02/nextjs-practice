@@ -1,11 +1,12 @@
 "use server";
 
 interface Character {
-  id: number;
-  name: string;
-  status: "Alive" | "Dead" | "unknown";
   gender: "Male" | "Female";
+  id: number;
   image: string;
+  name: string;
+  species: string;
+  status: "Alive" | "Dead" | "unknown";
 }
 
 type Info = {
@@ -69,7 +70,28 @@ export default async function Page({
                 <h3 className="mt-6 text-sm font-medium leading-5 text-gray-900">
                   {character.name}
                 </h3>
-                <p className="font-medium text-gray-500">{character.status}</p>
+                <dl>
+                  <dt className="[clip: rect(0,0,0,0)] absolute -m-px h-px w-px overflow-hidden whitespace-nowrap border-0 p-0">
+                    Gender
+                  </dt>
+                  <dd className="text-sm text-gray-500/100">
+                    {character.gender}
+                  </dd>
+                  <dt className="[clip: rect(0,0,0,0)] absolute -m-px h-px w-px overflow-hidden whitespace-nowrap border-0 p-0">
+                    Species
+                  </dt>
+                  <dd className="text-sm text-gray-500/100">
+                    {character.species}
+                  </dd>
+                  <dt className="[clip: rect(0,0,0,0)] absolute -m-px h-px w-px overflow-hidden whitespace-nowrap border-0 p-0">
+                    Status
+                  </dt>
+                  <dd>
+                    <span className="inline-flex items-center rounded-full bg-green-50/100 pb-1 pl-2 pr-2 pt-1 text-xs font-medium text-green-700/100 ring ring-inset ring-green-600/20 ">
+                      {character.status}
+                    </span>
+                  </dd>
+                </dl>
               </div>
             </li>
           ))}
