@@ -1,4 +1,5 @@
-import { NextRequest,NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+
 export const dynamic = 'auto';
 export const dynamicParams = true;
 export const revalidate = false;
