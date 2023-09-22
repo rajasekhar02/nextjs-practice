@@ -7,8 +7,8 @@ import type {
   Info,
   RickMortyAPIListParams,
   RickMortyAPISearchParams,
+  CharacterPageRouteParams,
 } from "./types";
-import { createPortal } from "react-dom";
 
 const statusToColor: { [k in Character["status"]]: [string, string] } = {
   Alive: ["text-green-700/100", "ring-green-600/20"],
@@ -18,9 +18,8 @@ const statusToColor: { [k in Character["status"]]: [string, string] } = {
 
 async function fetchData({
   page,
-}: {
-  page: number;
-}): Promise<ListCharacterResponse> {
+}: RickMortyAPIListParams &
+  RickMortyAPISearchParams): Promise<ListCharacterResponse> {
   const URL = `http://localhost:3000/api?${new URLSearchParams(
     `page=${page}`,
   )}`;
@@ -117,55 +116,56 @@ const paginationElement = function (
       </div> */}
       <div className="min-w-0 flex-1">
         <h2 className="sm:overflow-hidden sm:text-ellipsis sm:whitespace-nowrap sm:text-3xl sm:tracking-tight">
-          {" "}
           Ricky Morty Characters
         </h2>
+        <div className="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap">
+          <p className="mt-2 flex items-center text-sm text-gray-500">
+            {`Showing ${startCharacterNo}-${
+              startCharacterNo + currPageCharacterSize - 1
+            } out of ${info.count}`}
+          </p>
+        </div>
       </div>
-
-      <div className="-mt-px flex w-0 flex-1">
-        {
+      <div className="mt-5 flex lg:ml-4 lg:mt-0">
+        <span className="hidden sm:block">
           <a
-            className="inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500/100"
+            className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
             href={info.prev}
           >
             Prev
           </a>
-        }
-      </div>
-      <div className="hidden md:-mt-px md:flex">
-        <p className="text-sm font-medium text-gray-700">
-          {`${startCharacterNo}-${
-            startCharacterNo + currPageCharacterSize
-          } of ${info.count}`}
-        </p>
-      </div>
-      <div className="-mt-px flex w-0 flex-1 justify-end">
-        {
+        </span>
+        <span className="ml-3 hidden sm:block">
           <a
-            className="inline-flex items-center  border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500/100"
+            className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
             href={info.next}
           >
             Next
           </a>
-        }
+        </span>
       </div>
     </nav>
   );
 };
 
-export default async function Page({
+export default async function CharacterPage({
   searchParams,
 }: {
-  searchParams: RickMortyAPIListParams & RickMortyAPISearchParams;
+  searchParams: CharacterPageRouteParams;
 }) {
-  const data = await fetchData({ page: searchParams.page || 1 });
-  const { info, results } = data;
+  const parsedRouteParams = {
+    page: searchParams.page ? +searchParams.page : 1,
+  };
 
+  const data = await fetchData({
+    page: parsedRouteParams.page,
+  });
+  const { info, results } = data;
   return (
     <>
       <header className="sticky top-0 z-50 bg-white/100 shadow-sm">
         <div className="pagination-actions ml-auto mr-auto max-w-7xl pb-4 pl-4 pr-4 pt-4 sm:pl-6 sm:pr-6 lg:pl-8 lg:pr-8">
-          {paginationElement(info, searchParams.page || 1, results.length)}
+          {paginationElement(info, parsedRouteParams.page, results.length)}
         </div>
       </header>
       <main>

@@ -19,7 +19,7 @@ export interface ListCharacterResponse {
 }
 
 export type RickMortyAPIListParams = {
-    page?: number
+    page: number
 }
 
 export type RickMortyAPISearchParams = {
@@ -30,3 +30,11 @@ export type RickMortyAPISearchParams = {
     gender?: 'male' | 'female' | 'unknown' | 'genderless';
 }
 
+export type CharacterPageRouteParams = {
+    page?: string;
+    name?: string;
+    status?: 'alive' | 'dead' | 'unknown';
+    species?: string;
+    type?: string;
+    gender?: 'male' | 'female' | 'unknown' | 'genderless';
+}
