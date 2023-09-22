@@ -31,7 +31,6 @@ async function fetchData({
   const URL = `http://localhost:3000/api?${new URLSearchParams(
     `page=${page}`,
   )}`;
-  console.log(URL);
   const res: Response = await fetch(URL, {
     method: "GET",
     cache: "no-store",
@@ -47,29 +46,35 @@ export default async function Page({
 }: {
   searchParams: URLParams;
 }) {
-  console.log(searchParams);
   const data = await fetchData({ page: searchParams.page || 1 });
   const { info, results } = data;
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 bg-gray-100 pb-8 pt-8">
       <div className="pagination-actions">
         {<a href={info.next}>Next</a>}
         {<a href={info.prev}>Prev</a>}
       </div>
-      <ul className="grid grid-cols-4 gap-4">
-        {results.map((character) => (
-          <li>
-            <h1 className="text-2xl font-medium text-gray-200">
-              {character.name}
-            </h1>
-            <p className="font-medium text-gray-500">{character.status}</p>
-            <img
-              className="h-32 w-32 shrink-0 rounded-full"
-              src={character.image}
-            ></img>
-          </li>
-        ))}
-      </ul>
+      <div className="ml-auto mr-auto max-w-7xl pl-4 pr-4">
+        <ul role="list" className="grid grid-cols-4 gap-4">
+          {results.map((character, index) => (
+            <li
+              className="col-span-1 flex flex-col rounded-lg bg-white text-center shadow"
+              key={index}
+            >
+              <div className="flex flex-1 flex-col p-8">
+                <img
+                  className="ml-auto mr-auto h-32 w-32 shrink-0 rounded-full"
+                  src={character.image}
+                ></img>
+                <h3 className="mt-6 text-sm font-medium leading-5 text-gray-900">
+                  {character.name}
+                </h3>
+                <p className="font-medium text-gray-500">{character.status}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
