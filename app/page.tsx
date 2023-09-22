@@ -8,6 +8,7 @@ import type {
   RickMortyAPIListParams,
   RickMortyAPISearchParams,
 } from "./types";
+import { createPortal } from "react-dom";
 
 const statusToColor: { [k in Character["status"]]: [string, string] } = {
   Alive: ["text-green-700/100", "ring-green-600/20"],
@@ -162,7 +163,7 @@ export default async function Page({
 
   return (
     <>
-      <header className="bg-white/100 shadow-sm">
+      <header className="sticky top-0 z-50 bg-white/100 shadow-sm">
         <div className="pagination-actions ml-auto mr-auto max-w-7xl pb-4 pl-4 pr-4 pt-4 sm:pl-6 sm:pr-6 lg:pl-8 lg:pr-8">
           {paginationElement(info, searchParams.page || 1, results.length)}
         </div>
