@@ -127,7 +127,7 @@ const paginationElement = function (
         </div>
       </div>
       <div className="mt-5 flex lg:ml-4 lg:mt-0">
-        <span className="hidden sm:block">
+        <span className="sm:block">
           <a
             className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
             href={info.prev}
@@ -135,7 +135,7 @@ const paginationElement = function (
             Prev
           </a>
         </span>
-        <span className="ml-3 hidden sm:block">
+        <span className="ml-3 sm:block">
           <a
             className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
             href={info.next}
@@ -172,7 +172,7 @@ export default async function CharacterPage({
         <div className="ml-auto mr-auto max-w-7xl sm:pl-6 sm:pr-4 lg:pl-8 lg:pr-8">
           <ul
             role="list"
-            className="grid grid-cols-4 gap-4 pb-8 pl-4 pr-4 pt-8 sm:pl-0 sm:pr-0"
+            className="grid grid-cols-1 gap-4 pb-8 pl-4 pr-4 pt-8 sm:grid-cols-2 sm:pl-0 sm:pr-0 md:grid-cols-3 lg:grid-cols-4"
           >
             {results.map(ListElement)}
           </ul>
