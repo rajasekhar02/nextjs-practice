@@ -1,7 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { getItem } from "@/utils/get-item";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -51,7 +50,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const data = await getItem();
   return (
     <html lang="en">
       <body>

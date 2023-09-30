@@ -1,29 +1,16 @@
 {
-  "name": "nextjs",
+  "name": "nextjs-practice",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "next": "^13.5.2",
-    "postcss": "8.4.30",
-    "react": "latest",
-    "react-dom": "latest",
-    "tailwindcss": "3.3.3",
-    "typescript": "latest"
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
+    "eslint": "^8.48.0",
     "prettier": "^3.0.3",
-    "prettier-plugin-tailwindcss": "^0.5.4",
-    "@types/node": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "autoprefixer": "10.4.15",
-    "eslint": "8.49.0",
-    "eslint-config-next": "13.5.1"
+    "turbo": "^1.10.12"
   }
 }
