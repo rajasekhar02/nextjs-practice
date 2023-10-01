@@ -30,9 +30,6 @@ async function fetchData({
   return data;
 }
 
-
-
-
 export default async function CharacterPage({
   searchParams,
 }: {

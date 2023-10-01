@@ -1,0 +1,1 @@
+export interface Values { delimiter: string, delimitedText: string }
