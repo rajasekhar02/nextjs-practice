@@ -73,7 +73,7 @@ const Step1Form = function () {
     ["tab", " "],
   ];
   let formInitValues = {
-    delimiter: defaultDelimiters[0][1],
+    delimiter: defaultDelimiters[1][1],
     delimitedText: "",
   };
   return (
