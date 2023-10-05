@@ -8,7 +8,10 @@ export const step1FormAtom = atom({
     customDelimiter: ""
 })
 export const splittedTextAtom = atom((get)=>{
-  const {delimitedText, delimiter} = get(step1FormAtom)
+  const {delimitedText,customDelimiter, delimiter} = get(step1FormAtom)
+  if(delimiter == "custom"){
+    return delimitedText.split(customDelimiter)
+  }
   return delimitedText.split(delimiter)
 })
 export const formStagesAtom = atom({stage: FormStages.Step1Form})

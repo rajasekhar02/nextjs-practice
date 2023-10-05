@@ -43,9 +43,9 @@ const RadioButtonWithCustomInput = function(){
     helpersDF.setValue('custom')
     console.log(delimiterField.value)
   }
-  useEffect(()=>{
-    console.log(delimiterField.value)
-  },[delimiterField])
+  // useEffect(()=>{
+  //   console.log(delimiterField.value)
+  // },[delimiterField])
   return (
     <RadioButton
     label="Custom"
