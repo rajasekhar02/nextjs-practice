@@ -27,7 +27,7 @@ function submitStep1Form(
   >,
 ) {
   setStep1Form(values);
-  setFormStage({ stage: FormStages.Step2Form });
+  setFormStage({ stage: FormStages.GalleryView });
   // setTimeout(() => {
   //   alert(JSON.stringify(values, null, 2));
   //   setSubmitting(false);
