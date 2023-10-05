@@ -1,19 +1,16 @@
 "use client";
 import Image from "next/image";
 import Step1Form from "./components/Step1Form";
-import StatusComponent from "./components/StatusComponent";
+import GalleryView from "./components/GalleryView";
 import { useAtomValue } from "jotai";
 import { formStagesAtom } from "./state";
-import { ReactElement } from "react";
 import { FormStages } from "./types";
 export default function Home() {
   let formStage = useAtomValue(formStagesAtom)
   return (
-    <main>
-      <div>
+    <main className="flex justify-center">
       {formStage.stage == FormStages.Step1Form && <Step1Form></Step1Form>}
-      {formStage.stage == FormStages.Step2Form && <StatusComponent></StatusComponent>}
-      </div>
+      {formStage.stage == FormStages.GalleryView && <GalleryView></GalleryView>}
     </main>
   );
 }

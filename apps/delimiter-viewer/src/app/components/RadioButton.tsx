@@ -1,12 +1,18 @@
 import { Field, useFormikContext } from "formik";
 import { Values } from "../types";
+import { ReactElement } from "react";
+import { useAtomValue } from "jotai";
+import { step1FormAtom } from "../state";
+
 
 const RadioButton = function ({
     label,
     value,
+    children
   }: {
     label: string;
     value: string;
+    children: ReactElement | string
   }) {
     const { values } = useFormikContext<Values>();
     return (
@@ -24,7 +30,7 @@ const RadioButton = function ({
             htmlFor="horizontal-list-radio-license"
             className="ml-2 w-full py-3 text-sm font-medium text-gray-900 dark:text-gray-300"
           >
-            {label}
+            {children}
           </label>
         </div>
       </li>
