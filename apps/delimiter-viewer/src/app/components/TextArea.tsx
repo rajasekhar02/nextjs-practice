@@ -7,9 +7,9 @@ const TextArea = function () {
       <>
         <label
           htmlFor="message"
-          className="mb-4 block text-sm font-medium text-gray-900 dark:text-white"
+          className="mb-4 block font-semibold text-gray-900 dark:text-white"
         >
-          Paste the Delimited Text
+          Paste the Delimited Image Urls
         </label>
         <Field
           component="textarea"

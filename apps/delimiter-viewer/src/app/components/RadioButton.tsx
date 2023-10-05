@@ -1,6 +1,8 @@
 import { Field, useFormikContext } from "formik";
 import { Values } from "../types";
 import { ReactElement } from "react";
+import { useAtomValue } from "jotai";
+import { step1FormAtom } from "../state";
 
 
 const RadioButton = function ({
