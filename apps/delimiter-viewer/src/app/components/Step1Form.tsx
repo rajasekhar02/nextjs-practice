@@ -12,7 +12,7 @@ function submitStep1Form(
   values: Values,
   {setSubmitting}:FormikHelpers<Values>,
   setStep1Form: SetAtom<ExtractAtomArgs<typeof step1FormAtom>,ExtractAtomResult<typeof step1FormAtom>>,
-  setFormStage:SetAtom<ExtractAtomArgs<typeof formStagesAtom>,ExtractAtomResult<typeof formStagesAtom>>
+  setFormStage: SetAtom<ExtractAtomArgs<typeof formStagesAtom>,ExtractAtomResult<typeof formStagesAtom>>
 ) {
   setStep1Form(values)
   setFormStage({stage:FormStages.Step2Form})
