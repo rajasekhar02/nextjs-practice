@@ -26,7 +26,7 @@ const Step1Form = function () {
   const defaultDelimiters: Array<[string, string]> = [
     ["Comma", ","],
     ["pipe", "|"],
-    ["tab", " "],
+    ["tab", "\\t"],
   ];
   let formInitValues = {
     delimiter: defaultDelimiters[1][1],
@@ -35,8 +35,9 @@ const Step1Form = function () {
   let setStep1Form = useSetAtom(step1FormAtom)
   let setFormStage = useSetAtom(formStagesAtom)
   return (
-    <Formik initialValues={formInitValues} onSubmit={(values, params)=>submitStep1Form(values, params, setStep1Form, setFormStage)}>
-      <Form>
+    
+    <Formik  initialValues={formInitValues} onSubmit={(values, params)=>submitStep1Form(values, params, setStep1Form, setFormStage)}>
+      <Form className="space-y-6">
         <h3 className="mb-4 font-semibold text-gray-900 dark:text-white">
           Delimiter
         </h3>
@@ -47,14 +48,17 @@ const Step1Form = function () {
                 label={delimiter[0]}
                 value={delimiter[1]}
                 key={`delimiter-radio-${index}`}
-              ></RadioButton>
+              >
+                {`${delimiter[0]} (${delimiter[1]})`}
+              </RadioButton>
             );
           })}
         </ul>
         <TextArea></TextArea>
-        <button type="submit">Next</button>
+        <button type="submit" className="mt-2 text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Next</button>
       </Form>
     </Formik>
+
   );
 };
   
