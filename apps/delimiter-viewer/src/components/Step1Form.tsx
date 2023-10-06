@@ -71,14 +71,14 @@ const Step1Form = function () {
   let setStep1Form = useSetAtom(step1FormAtom);
   let setFormStage = useSetAtom(formStagesAtom);
   return (
-    <div className="w-full rounded-lg border border-gray-200 bg-white p-4 shadow dark:border-gray-700 dark:bg-gray-800 sm:p-6 md:p-8">
+    <div className="max-w-2xl rounded-lg border border-gray-200 bg-white p-4 shadow dark:border-gray-700 dark:bg-gray-800 sm:p-6 md:p-8">
       <Formik
         initialValues={step1FormAtomValue}
         onSubmit={(values, params) =>
           submitStep1Form(values, params, setStep1Form, setFormStage)
         }
       >
-        <Form className="space-y-0">
+        <Form >
           <h3 className="mb-4 font-semibold text-gray-900 dark:text-white">
             Delimiter
           </h3>

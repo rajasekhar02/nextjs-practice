@@ -7,7 +7,7 @@ const TextArea = function () {
     <>
       <label
         htmlFor="message"
-        className="mb-4 block font-semibold text-gray-900 dark:text-white"
+        className="mb-2 mt-6 block font-semibold text-gray-900 dark:text-white"
       >
         Paste the Delimited Image Urls
       </label>
@@ -23,4 +23,5 @@ const TextArea = function () {
     </>
   );
 };
+
 export default TextArea;
