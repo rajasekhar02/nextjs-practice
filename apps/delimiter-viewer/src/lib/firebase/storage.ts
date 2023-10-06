@@ -13,8 +13,9 @@ export async function updateNotesImage(notionNotesId: string, image: File) {
   }
 }
 
-async function uploadImage(notionNotesId, image) {
-  const filePath = `images/notionNotesId_${image.name}`;
+async function uploadImage(notionNotesId: string, image: File) {
+  // TODO: Place this path in the ENV File
+  const filePath = `images/${notionNotesId}_${image.name}`;
   const newImageRef = ref(storage, filePath);
   await uploadBytesResumable(newImageRef, image);
   return await getDownloadURL(newImageRef);
