@@ -9,11 +9,6 @@ export default function Gallery({ images }: { images: string[] }) {
     return urlObj.searchParams.get(param) || "Invalid"
   }
   const handleCopyToClipBoard = async function(urlObj:URL){
-    // navigator.permissions.query({name: "clipboard-write"}).then((result) =>{
-    //   if (result.state === "granted" || result.state==="prompt"){
-
-    //   }
-    // })
     await navigator.clipboard.writeText(urlObj.href)
   }
   const handleSaveImage = async function (urlObj: URL) {
