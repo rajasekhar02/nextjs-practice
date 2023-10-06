@@ -1,6 +1,19 @@
+import { updateNotesImage } from "@/lib/firebase/storage";
 import Image from "next/image";
 
 export default function Gallery({ images }: { images: string[] }) {
+  const handleSaveImage = async function (imageUrl: string) {
+    const response = await fetch(imageUrl);
+    const blob = await response.blob();
+    const file = new File(
+      [blob],
+      `${imageUrl.slice(imageUrl.length - 20, 20)}.jpg`,
+      { type: blob.type },
+    );
+    console.log(file);
+    const savedURL = await updateNotesImage(imageUrl.slice(0, 20), file);
+    console.log(savedURL);
+  };
   return (
     <div className="bg-white dark:bg-gray-700">
       <div className="lg:max-w-10xl mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -18,9 +31,12 @@ export default function Gallery({ images }: { images: string[] }) {
                     alt={imageURL}
                   ></Image>
                 </div>
-                <h3 className="mt-4 text-sm text-gray-700 dark:text-gray-300">
+                <button
+                  onClick={() => handleSaveImage(imageURL)}
+                  className="mt-4 text-sm text-gray-700 dark:text-gray-300"
+                >
                   Save to Firebase
-                </h3>
+                </button>
               </a>
             );
           })}
