@@ -1,41 +1,58 @@
 import { updateNotesImage } from "@/lib/firebase/storage";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Gallery({ images }: { images: string[] }) {
-  const handleSaveImage = async function (imageUrl: string) {
-    const response = await fetch(imageUrl);
+  const listURLObjs = images.map(imageURL=>new URL(imageURL))
+  const [firebaseImageURLs, setFirebaseImageURLs] = useState<{[key:string]:string}>({})
+  const getParam = function(urlObj:URL, param:string):string{
+    return urlObj.searchParams.get(param) || "Invalid"
+  }
+  const handleCopyToClipBoard = async function(urlObj:URL){
+    // navigator.permissions.query({name: "clipboard-write"}).then((result) =>{
+    //   if (result.state === "granted" || result.state==="prompt"){
+
+    //   }
+    // })
+    await navigator.clipboard.writeText(urlObj.href)
+  }
+  const handleSaveImage = async function (urlObj: URL) {
+    const response = await fetch(urlObj.href);
     const blob = await response.blob();
-    const file = new File(
-      [blob],
-      `${imageUrl.slice(imageUrl.length - 20, 20)}.jpg`,
-      { type: blob.type },
-    );
-    console.log(file);
-    const savedURL = await updateNotesImage(imageUrl.slice(0, 20), file);
+    const file = new File([blob], `${urlObj.searchParams.get("t")}.jpg`, {
+      type: blob.type,
+    });
+    const savedURL:string = await updateNotesImage(urlObj.hostname, file);
+    setFirebaseImageURLs({...firebaseImageURLs, [getParam(urlObj,'t')]:savedURL})
     console.log(savedURL);
   };
   return (
     <div className="bg-white dark:bg-gray-700">
-      <div className="lg:max-w-10xl mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <h2 className="sr-only">Products</h2>
+      <div className="max-w-8xl mx-auto px-2 py-1 sm:px-6 sm:py-24 lg:max-w-4xl lg:px-8">
+        <h2 className="sr-only">Images</h2>
 
-        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-          {images.map((imageURL: string, index: number) => {
+        <div className="grid grid-cols-1 gap-x-2 gap-y-2 sm:grid-cols-2 lg:grid-cols-7 xl:grid-cols-3 xl:gap-x-8">
+          {listURLObjs.map((urlObj: URL, index: number) => {
             return (
               <a href="#" className="group" key={`image-${index}`}>
                 <div className="aspect-h-1 aspect-w-1 xl:aspect-h-9 xl:aspect-w-8 w-full overflow-hidden rounded-lg bg-gray-200">
                   <Image
                     fill={true}
-                    src={imageURL}
+                    src={urlObj.href}
                     className="h-full w-full object-cover object-center group-hover:opacity-75"
-                    alt={imageURL}
+                    alt={getParam(urlObj,'t')}
                   ></Image>
                 </div>
                 <button
-                  onClick={() => handleSaveImage(imageURL)}
-                  className="mt-4 text-sm text-gray-700 dark:text-gray-300"
+                  type="button"
+                  onClick={() => handleSaveImage(urlObj)}
+                  className="mt-2 rounded-lg bg-blue-700 px-3 py-2 text-center text-xs font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Save to Firebase
+                </button>
+                <button className={`mt-2 ml-1 rounded-lg bg-blue-700 px-3 py-2 text-center text-xs font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ${firebaseImageURLs[getParam(urlObj,'t')]==undefined && "disabled:bg-blue-400 disabled:dark:bg-blue-500 disabled:cursor-not-allowed"}`}
+                disabled={firebaseImageURLs[getParam(urlObj,'t')]==undefined} onClick={()=>handleCopyToClipBoard(urlObj)}>
+                  Copy to Clipboard 
                 </button>
               </a>
             );
