@@ -1,0 +1,14 @@
+{
+    "extends":["//"],
+    "pipeline":{
+        "build":{
+            "env":[
+                "NEXT_PUBLIC_FIREBASE_*"
+            ],
+            "outputs": [
+                "dist/**"
+            ]
+        }
+    }
+
+}

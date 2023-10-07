@@ -1,0 +1,19 @@
+{
+  "name": "firebase-client",
+  "version": "1.0.2",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build":"tsup src/index.ts --format cjs,esm --dts",
+    "dev":"npm run build -- --watch"
+  },
+  "dependencies": {
+    "firebase": "^10.4.0",
+    "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.3",
+    "tsup": "^7.2.0"
+  }
+}
