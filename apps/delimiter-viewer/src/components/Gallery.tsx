@@ -1,4 +1,4 @@
-import { updateNotesImage } from "@/lib/firebase/storage";
+import { storage } from "firebase-client";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -17,7 +17,7 @@ export default function Gallery({ images }: { images: string[] }) {
     const file = new File([blob], `${urlObj.searchParams.get("t")}.jpg`, {
       type: blob.type,
     });
-    const savedURL:string = await updateNotesImage(urlObj.hostname, file);
+    const savedURL:string = await storage.saveFile(`${process.env.NEXT_PUBLIC_BUCKET_ROOT}/${urlObj.hostname}`, file);
     setFirebaseImageURLs({...firebaseImageURLs, [getParam(urlObj,'t')]:savedURL})
     console.log(savedURL);
   };
@@ -31,12 +31,11 @@ export default function Gallery({ images }: { images: string[] }) {
             return (
               <a href="#" className="group" key={`image-${index}`}>
                 <div className="aspect-h-1 aspect-w-1 xl:aspect-h-9 xl:aspect-w-8 w-full overflow-hidden rounded-lg bg-gray-200">
-                  <Image
-                    fill={true}
+                  <img
                     src={urlObj.href}
                     className="h-full w-full object-cover object-center group-hover:opacity-75"
                     alt={getParam(urlObj,'t')}
-                  ></Image>
+                  />
                 </div>
                 <button
                   type="button"

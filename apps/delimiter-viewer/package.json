@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "firebase": "^10.4.0",
+    "firebase-client":"workspace:*",
     "formik": "^2.4.5",
     "jotai": "^2.4.3",
     "next": "latest",

@@ -12,6 +12,20 @@ To save images from any source, such as LinkedIn, to Notion for personal notes w
 - TailwindCSS: For styling
 - Next.js: Clientside rendering mode
 
+## Execution
+
+Commands for development mode
+```bash
+turbo run build --filter=firebase-client
+turbo run dev --filter=delimiter-viewer
+```
+
+Commands to deploy the app locally
+```bash
+turbo run build --filter=delimiter-viewer
+pnpx serve ./apps/delimiter-viewer/out
+```
+
 ## Current Functionality:
 
 - Provides a form that can parse the delimited image URLs
