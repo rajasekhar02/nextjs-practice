@@ -1,30 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Project Title: Rick and Morty Character frontend Page
 
-## Getting Started
+## Purpose
 
-First, run the development server:
+To learn about server-side rendering using Next.js and TailwindCSS.
 
+## Libraries and API
+
+- [RickandMorty API](https://rickandmortyapi.com)
+- Tailwind CSS - for Styling
+
+## Execution
+
+Commands for development mode
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+turbo run dev --filter=ricky-monty-api-frontend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Current Functionality:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Display the characters and their properties with pagination in the television show Rick and Morty
+![Image for above](./screenshots/app1.png)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Planned Features:
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Implement Search box to get characters based on the input
+2. Implement i18n support
+3. Move the constants and config to separate file
