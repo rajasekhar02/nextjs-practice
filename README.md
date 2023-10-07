@@ -7,7 +7,7 @@ Turbo Repo for all the nextjs projects
 - Display the characters and their properties with pagination in the television show Rick and Morty
   ![Image for above](./apps/ricky-monty-api-frontend/screenshots/app1.png)
 
-[click here for Detailed Info](./apps/ricky-monty-api-frontend/README.md)
+[Click here for Detailed Info](./apps/ricky-monty-api-frontend/README.md)
 
 ### Delimiter Viewer
 
@@ -19,7 +19,7 @@ Turbo Repo for all the nextjs projects
   ![Image of above text](./apps/delimiter-viewer/screenshots/stored%20image%20in%20firebase.png)
 - Can copy the Firebase URL to clipboard
 
-[click here for Detailed Info](./apps/delimiter-viewer/README.md)
+[Click here for Detailed Info](./apps/delimiter-viewer/README.md)
 
 ## Learning in Monorepo using Turborepo
 
