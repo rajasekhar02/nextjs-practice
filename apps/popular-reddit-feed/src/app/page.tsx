@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { useEffect } from "react";
 import localStore from "@/utils/localStore";
 interface GetRedditAccessTokenResp {
