@@ -8,12 +8,13 @@ export enum TodoActionTypes {
   REMOVE_TODO,
   COMPLETE_TODO,
 }
+
 // Omit is used on interface or object type
 // Exclude is different, it is used to exclude a union type
 export type TodoAction =
-  | { type: TodoActionTypes.ADD_TODO } & Omit<TodoItem, "completed"> 
-  | { type: TodoActionTypes.REMOVE_TODO} &  Pick<TodoItem, "id">
-  | { type: TodoActionTypes.COMPLETE_TODO }&  Pick<TodoItem, "id">
+  | ({ type: TodoActionTypes.ADD_TODO } & Omit<TodoItem, "completed">)
+  | ({ type: TodoActionTypes.REMOVE_TODO } & Pick<TodoItem, "id">)
+  | ({ type: TodoActionTypes.COMPLETE_TODO } & Pick<TodoItem, "id">);
 
 export type TodoReducer = (state: TodoItem[], action: TodoAction) => TodoItem[];
 const reducer = (state: TodoItem[], action: TodoAction): TodoItem[] => {
